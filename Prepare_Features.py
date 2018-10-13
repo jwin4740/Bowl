@@ -21,9 +21,9 @@ from skimage import morphology
 import numpy as np
 import pandas as pd
 from scipy import ndimage
-from skimage import  filter
 from skimage.morphology import medial_axis
-from skimage.filter.rank import entropy
+from skimage import *
+# from skimage.filter.rank import entropy
 from skimage.morphology import disk
 from skimage.exposure import equalize_hist
 from skimage.morphology import skeletonize
@@ -31,9 +31,9 @@ from skimage.feature import ORB
 from sklearn.feature_extraction import image as s_im
 from sklearn.cluster import spectral_clustering
 from skimage.feature import hog
-from skimage.filter import   threshold_adaptive
+# from skimage.filter import   threshold_adaptive
 from skimage.restoration import denoise_tv_chambolle, denoise_bilateral
-from skimage.filter import threshold_otsu
+# from skimage.filter import threshold_otsu
 import mahotas
 import mahotas.features
 
@@ -258,6 +258,10 @@ def image_features_patches(img,p,max_patches):
      X[0:Xsize] = np.reshape(patches,(1, Xsize))
 
      return X
+def image_features_hog_fd(im):
+    return fd= hog(im, orientations=orientation, pixels_per_cell=(maxcell, maxcell), cells_per_block=(1, 1), visualise=False,normalise=True)
+
+       
 def image_features_hog(img, num_features,orientation,maxcell,maxPixel):
      # X is the feature vector with one row of features per image
      #  consisting of the pixel values a, num_featuresnd our metric
@@ -265,10 +269,9 @@ def image_features_hog(img, num_features,orientation,maxcell,maxPixel):
      image = np.where(imag > np.mean(imag),1.0,0.0)
      im = resize(image, (maxPixel, maxPixel))
      ##hog scikit transform
-     fd= hog(im, orientations=orientation, pixels_per_cell=(maxcell, maxcell),
-                    cells_per_block=(1, 1), visualise=False,normalise=True)
-
-     return fd
+     
+    
+     return image_features_hog_fd(im)
 def image_features_hog2(img, num_features,orientation,maxcell,maxPixel):
      # X is the feature vector with one row of features per image
      #  consisting of the pixel values a, num_featuresnd our metric
@@ -276,10 +279,9 @@ def image_features_hog2(img, num_features,orientation,maxcell,maxPixel):
      image = threshold_adaptive(img, block_size, offset=5)
      im = resize(image, (maxPixel, maxPixel))
      ##hog scikit transform
-     fd= hog(im, orientations=orientation, pixels_per_cell=(maxcell, maxcell),
-                    cells_per_block=(1, 1), visualise=False,normalise=True)
+     
 
-     return fd
+     return image_features_hog_fd(im)
 
 def image_features_hog3(img, num_features,orientation,maxcell,maxPixel):
 
@@ -288,10 +290,9 @@ def image_features_hog3(img, num_features,orientation,maxcell,maxPixel):
      binary = image > thresh
      im = resize(binary, (maxPixel, maxPixel))
      ##hog scikit transform
-     fd= hog(im, orientations=orientation, pixels_per_cell=(maxcell, maxcell),
-                    cells_per_block=(1, 1), visualise=False,normalise=True)
+     
 
-     return fd
+     return image_features_hog_fd(im)
 def image_features_orb(img,keypoints):
      # X is the feature vector with one row of features per image
      #
