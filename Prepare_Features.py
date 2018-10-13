@@ -11,25 +11,29 @@ date: 18/01/2015
     4.http://scikit-image.org/docs/dev/auto_examples/
 
 """
-
-import numpy as np	import numpy as np
-import pandas as pd	import pandas as pd
-from scipy import ndimage	from scipy import ndimage
-from skimage import  filter	
-from skimage.morphology import medial_axis	from skimage.morphology import medial_axis
-from skimage.filter.rank import entropy	from skimage import *
-# from skimage.filter.rank import entropy
-from skimage.morphology import disk	from skimage.morphology import disk
-from skimage.exposure import equalize_hist	from skimage.exposure import equalize_hist
-from skimage.morphology import skeletonize	from skimage.morphology import skeletonize
-from skimage.feature import ORB	from skimage.feature import ORB
-from sklearn.feature_extraction import image as s_im	from sklearn.feature_extraction import image as s_im
-from sklearn.cluster import spectral_clustering	from sklearn.cluster import spectral_clustering
-from skimage.feature import hog	from skimage.feature import hog
-from skimage.filter import   threshold_adaptive	# from skimage.filter import   threshold_adaptive
-from skimage.restoration import denoise_tv_chambolle, denoise_bilateral	from skimage.restoration import denoise_tv_chambolle, denoise_bilateral
-from skimage.filter import threshold_otsu	# from skimage.filter import threshold_otsu
-import mahotas	import mahotas
+from skimage.io import imread
+from skimage.transform import resize
+import glob
+import os
+from skimage import measure
+from skimage import morphology
+import numpy as np
+import pandas as pd
+from scipy import ndimage
+from skimage import  filter
+from skimage.morphology import medial_axis
+from skimage.filter.rank import entropy
+from skimage.morphology import disk
+from skimage.exposure import equalize_hist
+from skimage.morphology import skeletonize
+from skimage.feature import ORB
+from sklearn.feature_extraction import image as s_im
+from sklearn.cluster import spectral_clustering
+from skimage.feature import hog
+from skimage.filter import   threshold_adaptive
+from skimage.restoration import denoise_tv_chambolle, denoise_bilateral
+from skimage.filter import threshold_otsu
+import mahotas
 import mahotas.features
 
 ################# useful functions#############################################################
